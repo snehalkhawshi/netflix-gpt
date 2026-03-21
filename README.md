@@ -1,8 +1,10 @@
 # netflix-GPT
 
 - Create react app
-
 - Configure tailwind css
+- Header
+    - Login form (Sign In to Login other than first time)
+    - Sign Up (First time login)
 
 # Features
 
