@@ -1,5 +1,5 @@
-import Login from "./components/Login";
-import Browse from "./components/Browse";
+import Login from "./Login";
+import Browse from "./Browse";
 import { RouterProvider } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
 const Body = () => {
@@ -12,12 +12,11 @@ const Body = () => {
             path: '/browse',
             element: <Browse />
         }
-    ])
+    ]);
 
-
-    return <div>
-        <RouterProvider router={appRouter} />
-    </div>
+    return <div className="overflow-hidden p-0 m-0">
+            <RouterProvider router={appRouter} />
+        </div>
 }
 
 export default Body;
