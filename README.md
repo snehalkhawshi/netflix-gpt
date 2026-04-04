@@ -37,7 +37,10 @@
 - Tailwind classes to make Main container look awesome
 - Register TMDB API and create an app & get access token
 - Get data from TMDB API Now playing list API
-- Custom hooks for Now playing movies
+- Custom hooks for Now playing movies and Popular movies
+- GPT Search page
+- GPT Search bar
+- Multi-language Feature in our app
 
 # Features
 
