@@ -1,17 +1,15 @@
 import Header from "./Header";
 import { useState , useRef } from "react";
 import { checkValidData } from "../utils/validate";
-import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword , updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { BACKGROUND_IMAGE , USER_AVATAR } from "../utils/constants";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
     const [isSignInForm , setIsSignInForm] = useState(true);
     const [errorMessage , setErrorMessage] = useState(null);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const name = useRef(null);
     const email = useRef(null);

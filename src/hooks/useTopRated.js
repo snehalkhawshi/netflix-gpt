@@ -14,9 +14,6 @@ const useMovietrailer = (movieId) => {
 
         const trailer = filterData.length ? filterData[0] : json.results[0];
 
-        // console.log(trailer,"trailerData")
-
-        // setTrailer(trailerData);
         dispatch(addTopRatedMovies(trailer));
     };
 
