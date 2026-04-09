@@ -71,7 +71,7 @@ const Header = () => {
                                 </select> 
                             )
                         }
-                        <button className="py-2 px-4 bg-purple-800 text-white rounded-lg mr-4" onClick={handleGptSearchClick}>GPT Search</button>
+                        <button className="py-2 px-4 bg-purple-800 text-white rounded-lg mr-4" onClick={handleGptSearchClick}>{showGptSearch ? "Homepage" : "GPT Search"}</button>
                         <img 
                             className="h-8 w-8 mr-4 rounded-sm"
                             src={ user?.photoURL}
