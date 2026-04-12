@@ -3,13 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
 import openai from "../utils/openai";
 import { API_OPTIONS } from "../utils/constants";
-import { addGptMovieResult , setLoading } from "../utils/gptSlice";
-import Shimmer from "./Shimmer";
+import { addGptMovieResult } from "../utils/gptSlice";
 
 const GptSearchBar = () => {
     const selectedLanguage = useSelector((store) => store.config.lang);
 
-    const loading  = useSelector((store) => store.gpt);
 
     const searchText = useRef(null);
 
@@ -24,14 +22,9 @@ const GptSearchBar = () => {
 
     const handleGptSearchButtonClick = async () => {
         if (!searchText.current.value) return;
-        
-        dispatch(setLoading(true));
-        dispatch(addGptMovieResult(null));
      
         try {
-        // Get specific results
             const gptQuery = "Act as a movie recommendation system and suggest some movies for query : " + searchText.current.value + 'only give me names of 5 movies ,  comma seperated like the example result given ahead. Example Results: Gadar , Sholey , Don , Dhurandar , Kaho na pyar hai , Koi mil gaya';
-            // Make API call to GPT API and get movie results
             const gptSearchResult = await openai.chat.completions.create({
                 model: 'gpt-5.4-mini',
                 messages: [
@@ -41,7 +34,7 @@ const GptSearchBar = () => {
 
 
             if(!gptSearchResult.choices) {
-                // wrte here error handling
+
             }
 
             const gptMoviesList = gptSearchResult.choices?.[0]?.message?.content
@@ -56,8 +49,6 @@ const GptSearchBar = () => {
 
             const promiseResult = await Promise.all(data);
 
-            // show shimmer ui till result not get
-
             dispatch(addGptMovieResult({
                 movieNames: gptMoviesList,
                 movieResults: promiseResult
@@ -66,19 +57,15 @@ const GptSearchBar = () => {
             
 
         } catch (error) {
-            console.error(error);
-            dispatch(setLoading(false)); 
+            console.error(error); 
         }
 
-        // if (loading) {
-        //     return <Shimmer />; // 👈 your shimmer component
-        // }
     };
 
     return <div className="pt-[35%] md:pt-[10%] flex justify-center">
         <form onSubmit={(e) => e.preventDefault()} className="w-full md:w-1/2 bg-black grid grid-cols-12 m-4 rounded-l-lg">
             <input 
-                ref={searchText}s
+                ref={searchText}
                 type="text"
                 className="p-4 m-4 col-span-9 rounded-lg"
                 placeholder={lang[selectedLanguage]?.gptSearchPlaceHolder}
