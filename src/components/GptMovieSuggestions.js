@@ -1,21 +1,29 @@
 import { useSelector } from "react-redux";
 import MovieList from "./MovieList";
+import Shimmer from "./Shimmer";
+
 const GptMovieSuggestions = () => {
-    const gpt = useSelector((store) => store.gpt);
 
-    if (!gpt.gptMovies) return null;
-    
-    const { movieResults , movieNames } = gpt.gptMovies;
+    console.log("Shimmer:", Shimmer);
+    console.log("MovieList:", MovieList);
 
-    if(!movieNames) return null;
+    const { gptMovies, loading } = useSelector((store) => store.gpt);
 
-    return <div>
-            <div className="bg-black text-white p-4 mt-24 ml-4 opacity-90">
-                {
-                    movieNames.map((movieName , index) => <MovieList key={movieName} title={movieName} movies={movieResults[index]} />)
-                }
-            </div>
-        </div>
+    if (!gptMovies && !loading) return null;
+
+    // ✅ Show shimmer while loading 
+    if (loading) return <Shimmer />; 
+
+    const { movieResults, movieNames } = gptMovies; 
+
+
+    return ( 
+        <div> 
+            <div className="bg-black text-white p-4 mt-24 ml-4 mr-4 opacity-90"> 
+                {movieNames.map((movieName, index) => ( <MovieList key={movieName} title={movieName} movies={movieResults[index]} /> ))} 
+            </div> 
+        </div> 
+    );
 }
 
 export default GptMovieSuggestions;

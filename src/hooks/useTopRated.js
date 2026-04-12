@@ -1,25 +1,28 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import { addTopRatedMovies } from "../utils/moviesSlice";
 import { API_OPTIONS } from "../utils/constants";
-const useMovietrailer = (movieId) => {
+const useTopRatedMovie = (movieId) => {
+
     const dispatch = useDispatch();
-    // fetch trailor video
+
+    const topRatedMovies = useSelector((store) => store.movies?.topRated);
+
     const getTopRatedMovieVideos = async () => {
+
         const data = await fetch("https://api.themoviedb.org/3/movie/top_rated" , API_OPTIONS);
 
         const json = await data.json();
 
-        const filterData = json.results.filter((video)=>  video.type === "Trailer");
+        dispatch(addTopRatedMovies(json.results));
 
-        const trailer = filterData.length ? filterData[0] : json.results[0];
-
-        dispatch(addTopRatedMovies(trailer));
     };
 
     useEffect(() => {
-        getTopRatedMovieVideos();
-    },[movieId]);
+
+        if(!topRatedMovies) getTopRatedMovieVideos();
+
+    } , []);
 }
 
-export default useMovietrailer;
+export default useTopRatedMovie;
