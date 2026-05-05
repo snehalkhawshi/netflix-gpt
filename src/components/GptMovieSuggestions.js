@@ -4,14 +4,10 @@ import Shimmer from "./Shimmer";
 
 const GptMovieSuggestions = () => {
 
-    console.log("Shimmer:", Shimmer);
-    console.log("MovieList:", MovieList);
-
     const { gptMovies, loading } = useSelector((store) => store.gpt);
 
     if (!gptMovies && !loading) return null;
 
-    // ✅ Show shimmer while loading 
     if (loading) return <Shimmer />; 
 
     const { movieResults, movieNames } = gptMovies; 

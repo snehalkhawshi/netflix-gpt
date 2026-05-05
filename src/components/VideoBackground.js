@@ -3,15 +3,11 @@ import useMovietrailer from "../hooks/useMovieTrailer";
 
 const VideoBackground = ({movieId}) => {
 
-    console.log(movieId);
-
     const trailerVideo = useSelector((store) => store.movies.trailerVideo);
-    console.log(trailerVideo,"trailerVideo")
 
     useMovietrailer(movieId);
     
     return <div >
-            {/* {in react write attribute name in camelcase} */}
             <iframe
                 src={`https://www.youtube.com/embed/${trailerVideo?.key}?&autoplay=1&mute=1`}
                 className="w-screen aspect-video"

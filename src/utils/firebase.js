@@ -20,7 +20,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-analytics();
 export const auth = getAuth();
 
-// it will use to access our firebase from react project
+analytics();
+
+
